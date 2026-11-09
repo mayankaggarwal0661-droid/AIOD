@@ -1800,3 +1800,7 @@ tr.table-row.row-highlighted {
     color: var(--text-primary);
     font-weight: 700;
 }
+
+.theme-selector-widget {
+    display: none !important;
+}
