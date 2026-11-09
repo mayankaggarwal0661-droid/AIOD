@@ -48,15 +48,25 @@
     // =====================================================================
     // THEME SELECTOR & PERSISTENCE
     // =====================================================================
+    // THEME MANAGEMENT (Obsidian Cyber & Noir Gold in Settings -> Appearance)
+    // =====================================================================
     function initThemeSelector() {
         // Apply saved theme immediately
         setTheme(state.currentTheme, false);
 
-        // Bind all theme buttons across header and settings
-        document.querySelectorAll('.theme-pill-btn[data-theme]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const selected = btn.getAttribute('data-theme');
-                setTheme(selected, true);
+        // Bind interactive theme selection cards in Settings -> Appearance
+        document.querySelectorAll('.theme-selection-card[data-theme], .theme-pill-btn[data-theme]').forEach(el => {
+            el.addEventListener('click', () => {
+                const selected = el.getAttribute('data-theme');
+                if (selected) setTheme(selected, true);
+            });
+
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const selected = el.getAttribute('data-theme');
+                    if (selected) setTheme(selected, true);
+                }
             });
         });
     }
@@ -73,7 +83,20 @@
             }
         }
 
-        // Update active class on all selector buttons
+        // Update active class and indicator labels on theme selection cards
+        document.querySelectorAll('.theme-selection-card[data-theme]').forEach(card => {
+            const isMatch = card.getAttribute('data-theme') === themeName;
+            const labelEl = card.querySelector('.indicator-label');
+            if (isMatch) {
+                card.classList.add('active');
+                if (labelEl) labelEl.innerText = 'Active Theme';
+            } else {
+                card.classList.remove('active');
+                if (labelEl) labelEl.innerText = 'Select Theme';
+            }
+        });
+
+        // Update active class on any pill buttons
         document.querySelectorAll('.theme-pill-btn[data-theme]').forEach(btn => {
             if (btn.getAttribute('data-theme') === themeName) {
                 btn.classList.add('active');

@@ -130,24 +130,6 @@
                 </div>
 
                 <div class="header-right">
-                    <!-- Theme Selector Control -->
-                    <div class="theme-selector-widget" title="Switch Theme">
-                        <button type="button" class="theme-pill-btn active" data-theme="obsidian" title="Obsidian Cyber">
-                            <span class="theme-swatch-dots">
-                                <span class="swatch-dot" style="background: #111118;"></span>
-                                <span class="swatch-dot" style="background: #3B82F6;"></span>
-                            </span>
-                            <span>Obsidian</span>
-                        </button>
-                        <button type="button" class="theme-pill-btn" data-theme="noir-gold" title="Noir Gold">
-                            <span class="theme-swatch-dots">
-                                <span class="swatch-dot" style="background: #09090C; border: 1px solid #D4AF37;"></span>
-                                <span class="swatch-dot" style="background: #D4AF37;"></span>
-                            </span>
-                            <span>Noir Gold</span>
-                        </button>
-                    </div>
-
                     <span class="status-pill">
                         <span class="status-dot active"></span>
                         <span>YOLO26n Engine</span>
@@ -603,49 +585,131 @@
                     </div>
                 </div>
 
-                <!-- THEME CUSTOMIZATION -->
-                <div class="glass-card" style="max-width: 800px; margin-top: 24px;">
+                <!-- SETTINGS APPEARANCE & THEME SELECTION -->
+                <div class="glass-card" style="max-width: 860px; margin-top: 24px;">
                     <div class="glass-card-header">
-                        <h2 class="card-title">Theme &amp; Visual Experience</h2>
+                        <div>
+                            <div style="font-size: 11px; font-weight: 700; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;">Appearance</div>
+                            <h2 class="card-title" style="margin: 0;">Theme Selection</h2>
+                        </div>
                         <span class="status-pill">Interactive Palette</span>
                     </div>
-                    <div class="grid-2col" style="gap: 16px;">
-                        <div class="glass-card" style="padding: 16px; border: 1px solid var(--border-subtle); display: flex; flex-direction: column; justify-content: space-between;">
-                            <div>
-                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                                    <h3 style="font-size: 15px; font-weight: 700;">Obsidian Cyber</h3>
-                                    <span class="theme-swatch-dots">
-                                        <span class="swatch-dot" style="background: #111118; width: 10px; height: 10px;"></span>
-                                        <span class="swatch-dot" style="background: #3B82F6; width: 10px; height: 10px;"></span>
-                                        <span class="swatch-dot" style="background: #8B5CF6; width: 10px; height: 10px;"></span>
+
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">
+                        Select an interface theme. Your preference is automatically persisted and applies across all workspaces, 3D visualizers, and analytics charts.
+                    </p>
+
+                    <div class="theme-cards-grid">
+                        <!-- THEME CARD 1: OBSIDIAN -->
+                        <div class="theme-selection-card active" data-theme="obsidian" tabindex="0" role="button" aria-label="Activate Obsidian Cyber Theme">
+                            <div class="theme-card-header">
+                                <div class="theme-card-title-group">
+                                    <span class="theme-card-name">Obsidian Cyber</span>
+                                    <span class="theme-badge-current">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                        Active
                                     </span>
                                 </div>
-                                <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px;">
-                                    Deep obsidian charcoal, electric blue, violet accents, holographic cyan scanlines, and dark glassmorphism.
-                                </p>
+                                <div class="theme-color-dots">
+                                    <span class="theme-dot" style="background: #080A10;" title="Canvas"></span>
+                                    <span class="theme-dot" style="background: #111524;" title="Surface"></span>
+                                    <span class="theme-dot" style="background: #3B82F6;" title="Primary"></span>
+                                    <span class="theme-dot" style="background: #8B5CF6;" title="Secondary"></span>
+                                </div>
                             </div>
-                            <button type="button" class="btn-secondary theme-pill-btn" data-theme="obsidian" style="width: 100%; justify-content: center;">
-                                Activate Obsidian
-                            </button>
+
+                            <!-- Mini UI Mockup Preview -->
+                            <div class="theme-preview-mockup obsidian-mockup">
+                                <div class="mockup-sidebar">
+                                    <div class="mockup-brand"></div>
+                                    <div class="mockup-nav-item active"></div>
+                                    <div class="mockup-nav-item"></div>
+                                    <div class="mockup-nav-item"></div>
+                                </div>
+                                <div class="mockup-content">
+                                    <div class="mockup-header">
+                                        <div class="mockup-pill"></div>
+                                        <div class="mockup-pill-accent"></div>
+                                    </div>
+                                    <div class="mockup-hero">
+                                        <div class="mockup-text-lg"></div>
+                                        <div class="mockup-text-sm"></div>
+                                        <div class="mockup-btn"></div>
+                                    </div>
+                                    <div class="mockup-cards">
+                                        <div class="mockup-card"><div class="mockup-bar"></div></div>
+                                        <div class="mockup-card"><div class="mockup-bar-alt"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="theme-card-footer">
+                                <p class="theme-card-desc">
+                                    Cinematic midnight black, electric blue and violet neural accents, holographic cyan scanlines, and cool glassmorphism.
+                                </p>
+                                <div class="theme-selection-indicator">
+                                    <span class="indicator-radio"></span>
+                                    <span class="indicator-label">Active Theme</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="glass-card" style="padding: 16px; border: 1px solid var(--border-subtle); display: flex; flex-direction: column; justify-content: space-between;">
-                            <div>
-                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                                    <h3 style="font-size: 15px; font-weight: 700; color: #D4AF37;">Noir Gold</h3>
-                                    <span class="theme-swatch-dots">
-                                        <span class="swatch-dot" style="background: #09090C; border: 1px solid #D4AF37; width: 10px; height: 10px;"></span>
-                                        <span class="swatch-dot" style="background: #D4AF37; width: 10px; height: 10px;"></span>
-                                        <span class="swatch-dot" style="background: #FFFFFF; width: 10px; height: 10px;"></span>
+                        <!-- THEME CARD 2: NOIR GOLD -->
+                        <div class="theme-selection-card" data-theme="noir-gold" tabindex="0" role="button" aria-label="Activate Noir Gold Theme">
+                            <div class="theme-card-header">
+                                <div class="theme-card-title-group">
+                                    <span class="theme-card-name" style="color: #D4AF37;">Noir Gold</span>
+                                    <span class="theme-badge-current">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                        Active
                                     </span>
                                 </div>
-                                <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px;">
-                                    Deep obsidian black foundation, pure white typography, radiant luxury gold accents (#D4AF37), and golden yellow detection bounding boxes.
-                                </p>
+                                <div class="theme-color-dots">
+                                    <span class="theme-dot" style="background: #09090C; border: 1px solid #D4AF37;" title="Canvas"></span>
+                                    <span class="theme-dot" style="background: #15151C;" title="Surface"></span>
+                                    <span class="theme-dot" style="background: #D4AF37;" title="Gold Accent"></span>
+                                    <span class="theme-dot" style="background: #FFFFFF;" title="White Highlight"></span>
+                                </div>
                             </div>
-                            <button type="button" class="btn-secondary theme-pill-btn" data-theme="noir-gold" style="width: 100%; justify-content: center;">
-                                Activate Noir Gold
-                            </button>
+
+                            <!-- Mini UI Mockup Preview -->
+                            <div class="theme-preview-mockup noir-gold-mockup">
+                                <div class="mockup-sidebar">
+                                    <div class="mockup-brand"></div>
+                                    <div class="mockup-nav-item active"></div>
+                                    <div class="mockup-nav-item"></div>
+                                    <div class="mockup-nav-item"></div>
+                                </div>
+                                <div class="mockup-content">
+                                    <div class="mockup-header">
+                                        <div class="mockup-pill"></div>
+                                        <div class="mockup-pill-accent"></div>
+                                    </div>
+                                    <div class="mockup-hero">
+                                        <div class="mockup-text-lg"></div>
+                                        <div class="mockup-text-sm"></div>
+                                        <div class="mockup-btn"></div>
+                                    </div>
+                                    <div class="mockup-cards">
+                                        <div class="mockup-card"><div class="mockup-bar"></div></div>
+                                        <div class="mockup-card"><div class="mockup-bar-alt"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="theme-card-footer">
+                                <p class="theme-card-desc">
+                                    Deep obsidian black foundation, pure white typography, radiant luxury gold accents (#D4AF37), and golden detection frames.
+                                </p>
+                                <div class="theme-selection-indicator">
+                                    <span class="indicator-radio"></span>
+                                    <span class="indicator-label">Select Theme</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
