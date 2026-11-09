@@ -12,9 +12,12 @@
     // Application State
     const state = {
         currentSection: 'overview',
+        currentTheme: localStorage.getItem('aiod_theme') || 'obsidian',
         singleFile: null,
         batchFiles: [],
         lastDetection: null,
+        lastAnalytics: null,
+        lastHistory: null,
         selectedBoxIndex: null,
         viewMode: 'inspector', // 'inspector' or 'comparison'
         historyData: [],
@@ -25,6 +28,7 @@
     // INITIALIZATION & EVENT BINDINGS
     // =====================================================================
     document.addEventListener('DOMContentLoaded', () => {
+        initThemeSelector();
         initNavigation();
         initDetectionControls();
         initComparisonSlider();
@@ -40,6 +44,54 @@
         // Preload recent history count for overview telemetry
         fetchOverviewMetrics();
     });
+
+    // =====================================================================
+    // THEME SELECTOR & PERSISTENCE
+    // =====================================================================
+    function initThemeSelector() {
+        // Apply saved theme immediately
+        setTheme(state.currentTheme, false);
+
+        // Bind all theme buttons across header and settings
+        document.querySelectorAll('.theme-pill-btn[data-theme]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const selected = btn.getAttribute('data-theme');
+                setTheme(selected, true);
+            });
+        });
+    }
+
+    function setTheme(themeName, persist = true) {
+        state.currentTheme = themeName;
+        document.documentElement.setAttribute('data-theme', themeName);
+
+        if (persist) {
+            try {
+                localStorage.setItem('aiod_theme', themeName);
+            } catch (e) {
+                // Ignore storage errors in restricted contexts
+            }
+        }
+
+        // Update active class on all selector buttons
+        document.querySelectorAll('.theme-pill-btn[data-theme]').forEach(btn => {
+            if (btn.getAttribute('data-theme') === themeName) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // Notify Three.js visualizer of theme palette change
+        if (window.ThreeSceneManager && window.ThreeSceneManager.setTheme) {
+            window.ThreeSceneManager.setTheme(themeName);
+        }
+
+        // Re-render Chart.js if analytics data has been fetched
+        if (state.lastAnalytics && state.lastHistory) {
+            renderAnalyticsCharts(state.lastAnalytics, state.lastHistory);
+        }
+    }
 
     // =====================================================================
     // NAVIGATION & SECTIONS
@@ -693,6 +745,9 @@
             const historyPayload = await historyRes.json();
             const history = historyPayload.history || [];
 
+            state.lastAnalytics = analytics;
+            state.lastHistory = history;
+
             // Update Lifetime Numbers
             animateCounter('analytics-total-images', analytics.total_images_processed || 0);
             animateCounter('analytics-total-objects', analytics.total_objects_detected || 0);
@@ -712,6 +767,8 @@
             return;
         }
 
+        const isNoirGold = document.documentElement.getAttribute('data-theme') === 'noir-gold';
+
         // Chart 1: Lifetime Class Distribution (Doughnut)
         const donutCtx = document.getElementById('chart-class-distribution');
         if (donutCtx) {
@@ -719,25 +776,26 @@
             const labels = Object.keys(analytics.class_distribution || {});
             const values = Object.values(analytics.class_distribution || {});
 
+            const donutPalette = isNoirGold
+                ? ['#D4AF37', '#111111', '#E6C65A', '#2D2D2D', '#B8962E', '#4B4B4B', '#C9A028', '#8E8E8E']
+                : ['#3B82F6', '#8B5CF6', '#06B6D4', '#10B981', '#F59E0B', '#EC4899', '#6366F1', '#14B8A6'];
+
             state.charts.distribution = new Chart(donutCtx, {
                 type: 'doughnut',
                 data: {
                     labels: labels.slice(0, 8),
                     datasets: [{
                         data: values.slice(0, 8),
-                        backgroundColor: [
-                            '#3B82F6', '#8B5CF6', '#06B6D4', '#10B981',
-                            '#F59E0B', '#EC4899', '#6366F1', '#14B8A6'
-                        ],
+                        backgroundColor: donutPalette,
                         borderWidth: 2,
-                        borderColor: '#080A10'
+                        borderColor: isNoirGold ? '#FFFFFF' : '#080A10'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'right', labels: { color: '#94A3B8', font: { family: 'Plus Jakarta Sans' } } }
+                        legend: { position: 'right', labels: { color: isNoirGold ? '#171717' : '#94A3B8', font: { family: 'Plus Jakarta Sans' } } }
                     }
                 }
             });
@@ -756,8 +814,8 @@
                     datasets: [{
                         label: 'Detections Count',
                         data: topPairs.map(p => p[1]),
-                        backgroundColor: 'rgba(59, 130, 246, 0.75)',
-                        borderColor: '#3B82F6',
+                        backgroundColor: isNoirGold ? 'rgba(212, 175, 55, 0.88)' : 'rgba(59, 130, 246, 0.75)',
+                        borderColor: isNoirGold ? '#D4AF37' : '#3B82F6',
                         borderWidth: 1,
                         borderRadius: 4
                     }]
@@ -767,8 +825,8 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94A3B8' } },
-                        y: { grid: { display: false }, ticks: { color: '#F8FAFC' } }
+                        x: { grid: { color: isNoirGold ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#707070' : '#94A3B8' } },
+                        y: { grid: { display: false }, ticks: { color: isNoirGold ? '#171717' : '#F8FAFC' } }
                     },
                     plugins: {
                         legend: { display: false }
@@ -790,8 +848,8 @@
                     datasets: [{
                         label: 'Inference Latency (ms)',
                         data: reversedHistory.map(h => Math.round(h.inference_time_ms || 0)),
-                        borderColor: '#06B6D4',
-                        backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                        borderColor: isNoirGold ? '#D4AF37' : '#06B6D4',
+                        backgroundColor: isNoirGold ? 'rgba(212, 175, 55, 0.12)' : 'rgba(6, 182, 212, 0.1)',
                         fill: true,
                         tension: 0.35,
                         pointRadius: 3
@@ -801,11 +859,11 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94A3B8' } },
-                        y: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94A3B8' } }
+                        x: { grid: { color: isNoirGold ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#707070' : '#94A3B8' } },
+                        y: { grid: { color: isNoirGold ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#707070' : '#94A3B8' } }
                     },
                     plugins: {
-                        legend: { labels: { color: '#94A3B8' } }
+                        legend: { labels: { color: isNoirGold ? '#171717' : '#94A3B8' } }
                     }
                 }
             });
@@ -1044,7 +1102,8 @@
     // Expose helpers globally if needed
     window.AIODApp = {
         switchSection: switchSection,
-        setViewMode: setViewMode
+        setViewMode: setViewMode,
+        setTheme: setTheme
     };
 
 })();

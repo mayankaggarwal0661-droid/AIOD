@@ -1001,3 +1001,404 @@ tr.table-row.row-highlighted {
     }
 }
 
+
+
+/* =====================================================================
+   NOIR GOLD LUXURY THEME
+   Palette: Pure White (#FFFFFF), Deep Black (#111111), Luxury Gold (#D4AF37)
+   Bright Gold (#E6C65A), Muted Gold (#B8962E), Soft Grey (#E8E5DC)
+   ===================================================================== */
+
+[data-theme="noir-gold"] {
+    --bg-canvas: #F7F7F5;
+    --bg-surface: #FFFFFF;
+    --bg-surface-hover: #FAFAF8;
+    --bg-surface-elevated: #FFFFFF;
+    --bg-glass: rgba(255, 255, 255, 0.94);
+    --bg-input: #FFFFFF;
+
+    --border-subtle: #E8E5DC;
+    --border-glass: #E2DFD6;
+    --border-hover: #D4AF37;
+    --border-focus: #D4AF37;
+
+    --accent-primary: #D4AF37;
+    --accent-primary-hover: #B8962E;
+    --accent-secondary: #111111;
+    --accent-cyan: #D4AF37;
+    --accent-emerald: #16845B;
+    --accent-amber: #D4AF37;
+    --accent-rose: #D64545;
+
+    --accent-glow: rgba(212, 175, 55, 0.28);
+    --cyan-glow: rgba(212, 175, 55, 0.35);
+
+    --gradient-primary: linear-gradient(135deg, #111111 0%, #1E1E1E 100%);
+    --gradient-cyan: linear-gradient(135deg, #E6C65A 0%, #D4AF37 100%);
+    --gradient-surface: linear-gradient(180deg, #FFFFFF 0%, #F7F7F5 100%);
+    --gradient-scanner: linear-gradient(180deg, rgba(212, 175, 55, 0) 0%, rgba(212, 175, 55, 0.15) 75%, rgba(212, 175, 55, 0.95) 100%);
+
+    --text-primary: #171717;
+    --text-secondary: #707070;
+    --text-muted: #8E8E8E;
+    --text-on-accent: #FFFFFF;
+}
+
+/* Noir Gold: Deep Black Sidebar */
+[data-theme="noir-gold"] .sidebar {
+    background: #111111;
+    border-right: 1px solid rgba(212, 175, 55, 0.22);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="noir-gold"] .sidebar-brand {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="noir-gold"] .brand-icon-box {
+    background: linear-gradient(135deg, #E6C65A 0%, #D4AF37 100%);
+    color: #111111;
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+}
+
+[data-theme="noir-gold"] .brand-title {
+    color: #FFFFFF;
+}
+
+[data-theme="noir-gold"] .brand-subtitle {
+    color: #D4AF37;
+    font-weight: 600;
+}
+
+[data-theme="noir-gold"] .nav-link {
+    color: #CCCCCC;
+}
+
+[data-theme="noir-gold"] .nav-link:hover {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="noir-gold"] .nav-link.active {
+    color: #E6C65A;
+    background: rgba(212, 175, 55, 0.14);
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: inset 0 1px 0 rgba(230, 198, 90, 0.15);
+}
+
+[data-theme="noir-gold"] .sidebar-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="noir-gold"] .sidebar-toggle-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #CCCCCC;
+}
+
+[data-theme="noir-gold"] .sidebar-toggle-btn:hover {
+    color: #E6C65A;
+    border-color: #D4AF37;
+}
+
+/* Noir Gold: Top Header */
+[data-theme="noir-gold"] .top-header {
+    background: rgba(255, 255, 255, 0.94);
+    border-bottom: 1px solid #E8E5DC;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="noir-gold"] .header-title-pill {
+    color: #171717;
+    font-weight: 700;
+}
+
+[data-theme="noir-gold"] .status-pill {
+    background: #FFFFFF;
+    border-color: #E8E5DC;
+    color: #171717;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="noir-gold"] .status-dot.blue {
+    background-color: #D4AF37;
+    box-shadow: 0 0 8px #D4AF37;
+}
+
+/* Noir Gold: Glassmorphism Cards */
+[data-theme="noir-gold"] .glass-card {
+    background: #FFFFFF;
+    border: 1px solid #E8E5DC;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="noir-gold"] .glass-card-header {
+    border-bottom: 1px solid #E8E5DC;
+}
+
+[data-theme="noir-gold"] .card-title {
+    color: #111111;
+}
+
+/* Noir Gold: Buttons */
+[data-theme="noir-gold"] .btn-primary {
+    background: #111111;
+    color: #FFFFFF;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="noir-gold"] .btn-primary:hover:not(:disabled) {
+    border-color: #D4AF37;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+    color: #FFFFFF;
+}
+
+[data-theme="noir-gold"] .btn-secondary {
+    background: #FFFFFF;
+    border: 1px solid #111111;
+    color: #111111;
+}
+
+[data-theme="noir-gold"] .btn-secondary:hover {
+    border-color: #D4AF37;
+    color: #B8962E;
+    background: #FAFAF8;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+}
+
+[data-theme="noir-gold"] .btn-gold {
+    background: linear-gradient(135deg, #E6C65A 0%, #D4AF37 100%);
+    color: #111111;
+    font-weight: 700;
+    border: 1px solid #B8962E;
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+}
+
+[data-theme="noir-gold"] .btn-gold:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+}
+
+/* Noir Gold: Drop Zones */
+[data-theme="noir-gold"] .drop-zone {
+    border: 2px dashed #E8E5DC;
+    background: #F7F7F5;
+}
+
+[data-theme="noir-gold"] .drop-zone:hover,
+[data-theme="noir-gold"] .drop-zone.dragover {
+    border-color: #D4AF37;
+    background: rgba(212, 175, 55, 0.05);
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.15);
+}
+
+[data-theme="noir-gold"] .drop-icon-svg {
+    color: #D4AF37;
+}
+
+[data-theme="noir-gold"] .drop-primary-text {
+    color: #111111;
+}
+
+[data-theme="noir-gold"] .drop-sub-text {
+    color: #707070;
+}
+
+/* Noir Gold: Viewport & Scanner */
+[data-theme="noir-gold"] .preview-stage {
+    background: #F7F7F5;
+    border-color: #E8E5DC;
+}
+
+[data-theme="noir-gold"] .scanner-beam {
+    border-bottom: 2px solid #D4AF37;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+}
+
+[data-theme="noir-gold"] .scanner-grid {
+    background-image: 
+        linear-gradient(rgba(212, 175, 55, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 175, 55, 0.09) 1px, transparent 1px);
+}
+
+[data-theme="noir-gold"] .comparison-top-layer {
+    border-right: 2px solid #D4AF37;
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+}
+
+[data-theme="noir-gold"] .comparison-handle {
+    background: #111111;
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+}
+
+[data-theme="noir-gold"] .interactive-bbox {
+    border: 2px solid #D4AF37;
+    background: rgba(212, 175, 55, 0.16);
+}
+
+[data-theme="noir-gold"] .interactive-bbox:hover,
+[data-theme="noir-gold"] .interactive-bbox.highlighted {
+    border-color: #B8962E;
+    background: rgba(212, 175, 55, 0.32);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
+}
+
+[data-theme="noir-gold"] .bbox-tag {
+    background: #111111;
+    border: 1px solid #D4AF37;
+    color: #E6C65A;
+}
+
+[data-theme="noir-gold"] .mode-toggle-group {
+    background: #F7F7F5;
+    border: 1px solid #E8E5DC;
+}
+
+[data-theme="noir-gold"] .mode-toggle-btn.active {
+    background: #111111;
+    color: #E6C65A;
+}
+
+/* Noir Gold: Tables */
+[data-theme="noir-gold"] .table-wrapper {
+    background: #FFFFFF;
+    border-color: #E8E5DC;
+}
+
+[data-theme="noir-gold"] th {
+    background: #F7F7F5;
+    color: #707070;
+    border-bottom: 1px solid #E8E5DC;
+}
+
+[data-theme="noir-gold"] td {
+    border-bottom: 1px solid #E8E5DC;
+    color: #171717;
+}
+
+[data-theme="noir-gold"] tr.table-row:hover {
+    background: #FAFAF8;
+}
+
+[data-theme="noir-gold"] tr.table-row.row-highlighted {
+    background: rgba(212, 175, 55, 0.12) !important;
+    border-left: 3px solid #D4AF37;
+}
+
+/* Noir Gold: Form Controls & Chips */
+[data-theme="noir-gold"] .form-input {
+    background: #FFFFFF;
+    border-color: #E8E5DC;
+    color: #171717;
+}
+
+[data-theme="noir-gold"] .form-input:focus {
+    border-color: #D4AF37;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.25);
+}
+
+[data-theme="noir-gold"] input[type="range"] {
+    background: #E8E5DC;
+}
+
+[data-theme="noir-gold"] input[type="range"]::-webkit-slider-thumb {
+    background: #D4AF37;
+    border: 2px solid #111111;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+[data-theme="noir-gold"] .slider-value-badge {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: rgba(212, 175, 55, 0.35);
+    color: #B8962E;
+    font-weight: 700;
+}
+
+[data-theme="noir-gold"] .pill-chip {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: rgba(212, 175, 55, 0.35);
+    color: #B8962E;
+    font-weight: 700;
+}
+
+[data-theme="noir-gold"] .gallery-card {
+    background: #FFFFFF;
+    border-color: #E8E5DC;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="noir-gold"] .gallery-card:hover {
+    border-color: #D4AF37;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+}
+
+[data-theme="noir-gold"] .indeterminate-progress-bar {
+    background: #E8E5DC;
+}
+
+[data-theme="noir-gold"] .indeterminate-progress-bar::after {
+    background: linear-gradient(135deg, #111111 0%, #D4AF37 100%);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+[data-theme="noir-gold"] #gemini-card {
+    border-color: rgba(212, 175, 55, 0.35) !important;
+    background: rgba(254, 252, 245, 0.85) !important;
+}
+
+/* Theme Selector Widget Styles */
+.theme-selector-widget {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: 3px;
+    border-radius: var(--radius-md);
+    gap: 3px;
+}
+
+.theme-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.theme-pill-btn:hover {
+    color: var(--text-primary);
+}
+
+.theme-pill-btn.active {
+    background: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    border-color: var(--border-subtle);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="noir-gold"] .theme-pill-btn.active {
+    background: #111111;
+    color: #E6C65A;
+    border-color: #D4AF37;
+}
+
+.theme-swatch-dots {
+    display: flex;
+    gap: 2px;
+}
+
+.swatch-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
