@@ -38,9 +38,9 @@
         if (theme === 'noir-gold') {
             return {
                 primary: new THREE.Color(0xD4AF37),   // Gold Accent
-                secondary: new THREE.Color(0xE6C65A), // Bright Gold
-                tertiary: new THREE.Color(0x222222),  // Deep Obsidian Core
-                lineAlphaScale: 0.55
+                secondary: new THREE.Color(0xF5D061), // Bright Radiant Gold
+                tertiary: new THREE.Color(0xFFFFFF),  // Pure White
+                lineAlphaScale: 0.60
             };
         }
         // Default Obsidian Cyber
@@ -162,7 +162,7 @@
             vertexColors: true,
             transparent: true,
             opacity: 0.88,
-            blending: currentTheme === 'noir-gold' ? THREE.NormalBlending : THREE.AdditiveBlending
+            blending: THREE.AdditiveBlending
         });
 
         particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
@@ -204,8 +204,8 @@
         const linesMaterial = new THREE.LineBasicMaterial({
             vertexColors: true,
             transparent: true,
-            opacity: 0.35,
-            blending: currentTheme === 'noir-gold' ? THREE.NormalBlending : THREE.AdditiveBlending
+            opacity: currentTheme === 'noir-gold' ? 0.38 : 0.30,
+            blending: THREE.AdditiveBlending
         });
 
         linesMesh = new THREE.LineSegments(linesGeometry, linesMaterial);
@@ -233,7 +233,7 @@
         }
 
         if (particlesMesh && particlesMesh.material) {
-            particlesMesh.material.blending = newTheme === 'noir-gold' ? THREE.NormalBlending : THREE.AdditiveBlending;
+            particlesMesh.material.blending = THREE.AdditiveBlending;
             particlesMesh.material.needsUpdate = true;
         }
 
@@ -252,8 +252,8 @@
         }
 
         if (linesMesh && linesMesh.material) {
-            linesMesh.material.blending = newTheme === 'noir-gold' ? THREE.NormalBlending : THREE.AdditiveBlending;
-            linesMesh.material.opacity = newTheme === 'noir-gold' ? 0.45 : 0.28;
+            linesMesh.material.blending = THREE.AdditiveBlending;
+            linesMesh.material.opacity = newTheme === 'noir-gold' ? 0.38 : 0.30;
             linesMesh.material.needsUpdate = true;
         }
 

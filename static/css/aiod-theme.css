@@ -1004,61 +1004,62 @@ tr.table-row.row-highlighted {
 
 
 /* =====================================================================
-   NOIR GOLD LUXURY THEME
-   Palette: Pure White (#FFFFFF), Deep Black (#111111), Luxury Gold (#D4AF37)
-   Bright Gold (#E6C65A), Muted Gold (#B8962E), Soft Grey (#E8E5DC)
+   NOIR GOLD LUXURY THEME (Black Major, White & Golden Yellow Minor)
+   Major: Deep Obsidian Black (#09090C, #121218, #15151C)
+   Minor White: Pure White (#FFFFFF, #D4D4D8, #A1A1AA)
+   Minor Golden Yellow: Radiant Luxury Gold (#D4AF37, #E6C65A, #F5D061)
    ===================================================================== */
 
 [data-theme="noir-gold"] {
-    --bg-canvas: #F7F7F5;
-    --bg-surface: #FFFFFF;
-    --bg-surface-hover: #FAFAF8;
-    --bg-surface-elevated: #FFFFFF;
-    --bg-glass: rgba(255, 255, 255, 0.94);
-    --bg-input: #FFFFFF;
+    --bg-canvas: #09090C;
+    --bg-surface: rgba(18, 18, 24, 0.82);
+    --bg-surface-hover: rgba(26, 26, 35, 0.90);
+    --bg-surface-elevated: #15151C;
+    --bg-glass: rgba(20, 20, 28, 0.75);
+    --bg-input: rgba(12, 12, 17, 0.88);
 
-    --border-subtle: #E8E5DC;
-    --border-glass: #E2DFD6;
+    --border-subtle: rgba(212, 175, 55, 0.20);
+    --border-glass: rgba(212, 175, 55, 0.28);
     --border-hover: #D4AF37;
-    --border-focus: #D4AF37;
+    --border-focus: #E6C65A;
 
     --accent-primary: #D4AF37;
-    --accent-primary-hover: #B8962E;
-    --accent-secondary: #111111;
+    --accent-primary-hover: #E6C65A;
+    --accent-secondary: #FFFFFF;
     --accent-cyan: #D4AF37;
-    --accent-emerald: #16845B;
-    --accent-amber: #D4AF37;
-    --accent-rose: #D64545;
+    --accent-emerald: #10B981;
+    --accent-amber: #F5D061;
+    --accent-rose: #EF4444;
 
-    --accent-glow: rgba(212, 175, 55, 0.28);
-    --cyan-glow: rgba(212, 175, 55, 0.35);
+    --accent-glow: rgba(212, 175, 55, 0.32);
+    --cyan-glow: rgba(212, 175, 55, 0.40);
 
-    --gradient-primary: linear-gradient(135deg, #111111 0%, #1E1E1E 100%);
-    --gradient-cyan: linear-gradient(135deg, #E6C65A 0%, #D4AF37 100%);
-    --gradient-surface: linear-gradient(180deg, #FFFFFF 0%, #F7F7F5 100%);
-    --gradient-scanner: linear-gradient(180deg, rgba(212, 175, 55, 0) 0%, rgba(212, 175, 55, 0.15) 75%, rgba(212, 175, 55, 0.95) 100%);
+    --gradient-primary: linear-gradient(135deg, #F5D061 0%, #D4AF37 100%);
+    --gradient-cyan: linear-gradient(135deg, #F5D061 0%, #D4AF37 100%);
+    --gradient-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    --gradient-scanner: linear-gradient(180deg, rgba(212, 175, 55, 0) 0%, rgba(212, 175, 55, 0.18) 75%, rgba(212, 175, 55, 0.95) 100%);
 
-    --text-primary: #171717;
-    --text-secondary: #707070;
-    --text-muted: #8E8E8E;
-    --text-on-accent: #FFFFFF;
+    --text-primary: #FFFFFF;
+    --text-secondary: #D4D4D8;
+    --text-muted: #8E8E93;
+    --text-on-accent: #0A0A0D;
 }
 
-/* Noir Gold: Deep Black Sidebar */
+/* Noir Gold: Deep Black Sidebar with Gold Accents */
 [data-theme="noir-gold"] .sidebar {
-    background: #111111;
-    border-right: 1px solid rgba(212, 175, 55, 0.22);
-    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+    background: #0D0D11;
+    border-right: 1px solid rgba(212, 175, 55, 0.25);
+    box-shadow: 4px 0 28px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="noir-gold"] .sidebar-brand {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.18);
 }
 
 [data-theme="noir-gold"] .brand-icon-box {
-    background: linear-gradient(135deg, #E6C65A 0%, #D4AF37 100%);
-    color: #111111;
-    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+    background: linear-gradient(135deg, #F5D061 0%, #D4AF37 100%);
+    color: #0A0A0D;
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.4);
 }
 
 [data-theme="noir-gold"] .brand-title {
@@ -1071,126 +1072,132 @@ tr.table-row.row-highlighted {
 }
 
 [data-theme="noir-gold"] .nav-link {
-    color: #CCCCCC;
+    color: #A1A1AA;
 }
 
 [data-theme="noir-gold"] .nav-link:hover {
     color: #FFFFFF;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="noir-gold"] .nav-link.active {
-    color: #E6C65A;
-    background: rgba(212, 175, 55, 0.14);
+    color: #F5D061;
+    background: rgba(212, 175, 55, 0.15);
     border-color: rgba(212, 175, 55, 0.45);
-    box-shadow: inset 0 1px 0 rgba(230, 198, 90, 0.15);
+    box-shadow: inset 0 1px 0 rgba(245, 208, 97, 0.2);
 }
 
 [data-theme="noir-gold"] .sidebar-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 [data-theme="noir-gold"] .sidebar-toggle-btn {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.12);
-    color: #CCCCCC;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(212, 175, 55, 0.2);
+    color: #D4D4D8;
 }
 
 [data-theme="noir-gold"] .sidebar-toggle-btn:hover {
-    color: #E6C65A;
+    color: #F5D061;
     border-color: #D4AF37;
 }
 
 /* Noir Gold: Top Header */
 [data-theme="noir-gold"] .top-header {
-    background: rgba(255, 255, 255, 0.94);
-    border-bottom: 1px solid #E8E5DC;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    background: rgba(13, 13, 17, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.20);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 [data-theme="noir-gold"] .header-title-pill {
-    color: #171717;
+    color: #FFFFFF;
     font-weight: 700;
 }
 
 [data-theme="noir-gold"] .status-pill {
-    background: #FFFFFF;
-    border-color: #E8E5DC;
-    color: #171717;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    background: #14141B;
+    border-color: rgba(212, 175, 55, 0.22);
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="noir-gold"] .status-dot.blue {
     background-color: #D4AF37;
-    box-shadow: 0 0 8px #D4AF37;
+    box-shadow: 0 0 10px #D4AF37;
 }
 
-/* Noir Gold: Glassmorphism Cards */
+/* Noir Gold: Dark Obsidian Cards with Fine Gold Borders */
 [data-theme="noir-gold"] .glass-card {
-    background: #FFFFFF;
-    border: 1px solid #E8E5DC;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    background: rgba(18, 18, 24, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 175, 55, 0.20);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(212, 175, 55, 0.15);
 }
 
 [data-theme="noir-gold"] .glass-card-header {
-    border-bottom: 1px solid #E8E5DC;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.18);
 }
 
 [data-theme="noir-gold"] .card-title {
-    color: #111111;
+    color: #FFFFFF;
 }
 
-/* Noir Gold: Buttons */
+/* Noir Gold: Radiant Gold Primary Button & Refined Dark Secondary */
 [data-theme="noir-gold"] .btn-primary {
-    background: #111111;
-    color: #FFFFFF;
-    border: 1px solid rgba(212, 175, 55, 0.35);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #F5D061 0%, #D4AF37 100%);
+    color: #0A0A0D;
+    font-weight: 700;
+    border: 1px solid #E6C65A;
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
 }
 
 [data-theme="noir-gold"] .btn-primary:hover:not(:disabled) {
-    border-color: #D4AF37;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
-    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 26px rgba(212, 175, 55, 0.55);
+    background: linear-gradient(135deg, #FFF099 0%, #E6C65A 100%);
+    color: #000000;
 }
 
 [data-theme="noir-gold"] .btn-secondary {
-    background: #FFFFFF;
-    border: 1px solid #111111;
-    color: #111111;
+    background: #14141B;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: #FFFFFF;
 }
 
 [data-theme="noir-gold"] .btn-secondary:hover {
     border-color: #D4AF37;
-    color: #B8962E;
-    background: #FAFAF8;
-    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+    color: #F5D061;
+    background: rgba(212, 175, 55, 0.12);
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
 }
 
 [data-theme="noir-gold"] .btn-gold {
-    background: linear-gradient(135deg, #E6C65A 0%, #D4AF37 100%);
-    color: #111111;
+    background: linear-gradient(135deg, #F5D061 0%, #D4AF37 100%);
+    color: #0A0A0D;
     font-weight: 700;
-    border: 1px solid #B8962E;
-    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+    border: 1px solid #E6C65A;
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
 }
 
 [data-theme="noir-gold"] .btn-gold:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+    box-shadow: 0 6px 26px rgba(212, 175, 55, 0.55);
 }
 
 /* Noir Gold: Drop Zones */
 [data-theme="noir-gold"] .drop-zone {
-    border: 2px dashed #E8E5DC;
-    background: #F7F7F5;
+    border: 2px dashed rgba(212, 175, 55, 0.28);
+    background: rgba(14, 14, 20, 0.65);
 }
 
 [data-theme="noir-gold"] .drop-zone:hover,
 [data-theme="noir-gold"] .drop-zone.dragover {
     border-color: #D4AF37;
-    background: rgba(212, 175, 55, 0.05);
-    box-shadow: 0 0 24px rgba(212, 175, 55, 0.15);
+    background: rgba(212, 175, 55, 0.08);
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.2);
 }
 
 [data-theme="noir-gold"] .drop-icon-svg {
@@ -1198,22 +1205,22 @@ tr.table-row.row-highlighted {
 }
 
 [data-theme="noir-gold"] .drop-primary-text {
-    color: #111111;
+    color: #FFFFFF;
 }
 
 [data-theme="noir-gold"] .drop-sub-text {
-    color: #707070;
+    color: #A1A1AA;
 }
 
 /* Noir Gold: Viewport & Scanner */
 [data-theme="noir-gold"] .preview-stage {
-    background: #F7F7F5;
-    border-color: #E8E5DC;
+    background: #07070A;
+    border-color: rgba(212, 175, 55, 0.22);
 }
 
 [data-theme="noir-gold"] .scanner-beam {
     border-bottom: 2px solid #D4AF37;
-    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 24px rgba(212, 175, 55, 0.5);
 }
 
 [data-theme="noir-gold"] .scanner-grid {
@@ -1224,172 +1231,153 @@ tr.table-row.row-highlighted {
 
 [data-theme="noir-gold"] .comparison-top-layer {
     border-right: 2px solid #D4AF37;
-    box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.45);
 }
 
 [data-theme="noir-gold"] .comparison-handle {
-    background: #111111;
+    background: #0A0A0D;
     border: 2px solid #D4AF37;
-    color: #D4AF37;
-    box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+    color: #F5D061;
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.45);
 }
 
 [data-theme="noir-gold"] .interactive-bbox {
     border: 2px solid #D4AF37;
-    background: rgba(212, 175, 55, 0.16);
+    background: rgba(212, 175, 55, 0.18);
 }
 
 [data-theme="noir-gold"] .interactive-bbox:hover,
 [data-theme="noir-gold"] .interactive-bbox.highlighted {
-    border-color: #B8962E;
-    background: rgba(212, 175, 55, 0.32);
-    box-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
+    border-color: #F5D061;
+    background: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.55);
 }
 
 [data-theme="noir-gold"] .bbox-tag {
-    background: #111111;
+    background: #0A0A0D;
     border: 1px solid #D4AF37;
-    color: #E6C65A;
+    color: #F5D061;
 }
 
 [data-theme="noir-gold"] .mode-toggle-group {
-    background: #F7F7F5;
-    border: 1px solid #E8E5DC;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.22);
 }
 
 [data-theme="noir-gold"] .mode-toggle-btn.active {
-    background: #111111;
-    color: #E6C65A;
+    background: linear-gradient(135deg, #F5D061 0%, #D4AF37 100%);
+    color: #0A0A0D;
+    font-weight: 700;
 }
 
 /* Noir Gold: Tables */
 [data-theme="noir-gold"] .table-wrapper {
-    background: #FFFFFF;
-    border-color: #E8E5DC;
+    background: rgba(12, 12, 17, 0.6);
+    border-color: rgba(212, 175, 55, 0.20);
 }
 
 [data-theme="noir-gold"] th {
-    background: #F7F7F5;
-    color: #707070;
-    border-bottom: 1px solid #E8E5DC;
+    background: rgba(212, 175, 55, 0.06);
+    color: #D4AF37;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 [data-theme="noir-gold"] td {
-    border-bottom: 1px solid #E8E5DC;
-    color: #171717;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.14);
+    color: #FFFFFF;
 }
 
 [data-theme="noir-gold"] tr.table-row:hover {
-    background: #FAFAF8;
+    background: rgba(212, 175, 55, 0.06);
 }
 
 [data-theme="noir-gold"] tr.table-row.row-highlighted {
-    background: rgba(212, 175, 55, 0.12) !important;
+    background: rgba(212, 175, 55, 0.18) !important;
     border-left: 3px solid #D4AF37;
 }
 
 /* Noir Gold: Form Controls & Chips */
 [data-theme="noir-gold"] .form-input {
-    background: #FFFFFF;
-    border-color: #E8E5DC;
-    color: #171717;
+    background: rgba(12, 12, 17, 0.88);
+    border-color: rgba(212, 175, 55, 0.25);
+    color: #FFFFFF;
 }
 
 [data-theme="noir-gold"] .form-input:focus {
     border-color: #D4AF37;
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.25);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.35);
 }
 
 [data-theme="noir-gold"] input[type="range"] {
-    background: #E8E5DC;
+    background: rgba(255, 255, 255, 0.12);
 }
 
 [data-theme="noir-gold"] input[type="range"]::-webkit-slider-thumb {
     background: #D4AF37;
-    border: 2px solid #111111;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
 [data-theme="noir-gold"] .slider-value-badge {
-    background: rgba(212, 175, 55, 0.12);
-    border-color: rgba(212, 175, 55, 0.35);
-    color: #B8962E;
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.4);
+    color: #F5D061;
     font-weight: 700;
 }
 
 [data-theme="noir-gold"] .pill-chip {
-    background: rgba(212, 175, 55, 0.12);
-    border-color: rgba(212, 175, 55, 0.35);
-    color: #B8962E;
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.4);
+    color: #F5D061;
     font-weight: 700;
 }
 
 [data-theme="noir-gold"] .gallery-card {
-    background: #FFFFFF;
-    border-color: #E8E5DC;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    background: #121218;
+    border-color: rgba(212, 175, 55, 0.22);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="noir-gold"] .gallery-card:hover {
     border-color: #D4AF37;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
 }
 
 [data-theme="noir-gold"] .indeterminate-progress-bar {
-    background: #E8E5DC;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 [data-theme="noir-gold"] .indeterminate-progress-bar::after {
-    background: linear-gradient(135deg, #111111 0%, #D4AF37 100%);
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, #F5D061 0%, #D4AF37 100%);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
 }
 
 [data-theme="noir-gold"] #gemini-card {
     border-color: rgba(212, 175, 55, 0.35) !important;
-    background: rgba(254, 252, 245, 0.85) !important;
-}
-
-/* Theme Selector Widget Styles */
-.theme-selector-widget {
-    display: inline-flex;
-    align-items: center;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    padding: 3px;
-    border-radius: var(--radius-md);
-    gap: 3px;
-}
-
-.theme-pill-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: var(--radius-sm);
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-secondary);
-    background: transparent;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: var(--transition-fast);
-}
-
-.theme-pill-btn:hover {
-    color: var(--text-primary);
-}
-
-.theme-pill-btn.active {
-    background: var(--bg-surface-elevated);
-    color: var(--text-primary);
-    border-color: var(--border-subtle);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    background: rgba(20, 20, 28, 0.85) !important;
 }
 
 [data-theme="noir-gold"] .theme-pill-btn.active {
-    background: #111111;
-    color: #E6C65A;
-    border-color: #D4AF37;
+    background: linear-gradient(135deg, #F5D061 0%, #D4AF37 100%);
+    color: #0A0A0D;
+    border-color: #E6C65A;
+}
+
+[data-theme="noir-gold"] .skeleton {
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.04) 25%, rgba(212, 175, 55, 0.14) 50%, rgba(212, 175, 55, 0.04) 75%);
+    background-size: 200% 100%;
+}
+
+.hero-badge {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.35);
+    color: #93C5FD;
+}
+
+[data-theme="noir-gold"] .hero-badge {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.40);
+    color: #F5D061;
 }
 
 .theme-swatch-dots {

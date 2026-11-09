@@ -777,7 +777,7 @@
             const values = Object.values(analytics.class_distribution || {});
 
             const donutPalette = isNoirGold
-                ? ['#D4AF37', '#111111', '#E6C65A', '#2D2D2D', '#B8962E', '#4B4B4B', '#C9A028', '#8E8E8E']
+                ? ['#D4AF37', '#FFFFFF', '#E6C65A', '#F5D061', '#E4E4E7', '#C5A028', '#FEF08A', '#A1A1AA']
                 : ['#3B82F6', '#8B5CF6', '#06B6D4', '#10B981', '#F59E0B', '#EC4899', '#6366F1', '#14B8A6'];
 
             state.charts.distribution = new Chart(donutCtx, {
@@ -788,14 +788,14 @@
                         data: values.slice(0, 8),
                         backgroundColor: donutPalette,
                         borderWidth: 2,
-                        borderColor: isNoirGold ? '#FFFFFF' : '#080A10'
+                        borderColor: isNoirGold ? '#121218' : '#080A10'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'right', labels: { color: isNoirGold ? '#171717' : '#94A3B8', font: { family: 'Plus Jakarta Sans' } } }
+                        legend: { position: 'right', labels: { color: isNoirGold ? '#FFFFFF' : '#94A3B8', font: { family: 'Plus Jakarta Sans' } } }
                     }
                 }
             });
@@ -815,7 +815,7 @@
                         label: 'Detections Count',
                         data: topPairs.map(p => p[1]),
                         backgroundColor: isNoirGold ? 'rgba(212, 175, 55, 0.88)' : 'rgba(59, 130, 246, 0.75)',
-                        borderColor: isNoirGold ? '#D4AF37' : '#3B82F6',
+                        borderColor: isNoirGold ? '#F5D061' : '#3B82F6',
                         borderWidth: 1,
                         borderRadius: 4
                     }]
@@ -825,8 +825,8 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: { grid: { color: isNoirGold ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#707070' : '#94A3B8' } },
-                        y: { grid: { display: false }, ticks: { color: isNoirGold ? '#171717' : '#F8FAFC' } }
+                        x: { grid: { color: isNoirGold ? 'rgba(212, 175, 55, 0.10)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#D4D4D8' : '#94A3B8' } },
+                        y: { grid: { display: false }, ticks: { color: isNoirGold ? '#FFFFFF' : '#F8FAFC' } }
                     },
                     plugins: {
                         legend: { display: false }
@@ -850,6 +850,8 @@
                         data: reversedHistory.map(h => Math.round(h.inference_time_ms || 0)),
                         borderColor: isNoirGold ? '#D4AF37' : '#06B6D4',
                         backgroundColor: isNoirGold ? 'rgba(212, 175, 55, 0.12)' : 'rgba(6, 182, 212, 0.1)',
+                        pointBackgroundColor: isNoirGold ? '#FFFFFF' : '#06B6D4',
+                        pointBorderColor: isNoirGold ? '#D4AF37' : '#3B82F6',
                         fill: true,
                         tension: 0.35,
                         pointRadius: 3
@@ -859,11 +861,11 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: { grid: { color: isNoirGold ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#707070' : '#94A3B8' } },
-                        y: { grid: { color: isNoirGold ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#707070' : '#94A3B8' } }
+                        x: { grid: { color: isNoirGold ? 'rgba(212, 175, 55, 0.10)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#D4D4D8' : '#94A3B8' } },
+                        y: { grid: { color: isNoirGold ? 'rgba(212, 175, 55, 0.10)' : 'rgba(255,255,255,0.06)' }, ticks: { color: isNoirGold ? '#D4D4D8' : '#94A3B8' } }
                     },
                     plugins: {
-                        legend: { labels: { color: isNoirGold ? '#171717' : '#94A3B8' } }
+                        legend: { labels: { color: isNoirGold ? '#FFFFFF' : '#94A3B8' } }
                     }
                 }
             });
