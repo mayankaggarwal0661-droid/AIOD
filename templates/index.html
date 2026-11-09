@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIOD — AI Image Object Detection & Vision Analytics</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233B82F6'><path d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/></svg>">
+    
+    <!-- Enterprise Dark Design System -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aiod-theme.css') }}">
+
+    <!-- External Libraries with Fallback Safety -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Three.js Ambient Background Canvas Layer -->
+    <div id="three-bg-container"></div>
+
+    <div class="app-shell">
+        <!-- COLLAPSIBLE SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-title">AIOD Vision</div>
+                    <div class="brand-subtitle">Enterprise Vision Analytics</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-link active" data-section="overview">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
+                    </svg>
+                    <span class="nav-text">Overview</span>
+                </button>
+
+                <button class="nav-link" data-section="single">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="6" />
+                        <circle cx="12" cy="12" r="2" />
+                    </svg>
+                    <span class="nav-text">Single Detection</span>
+                </button>
+
+                <button class="nav-link" data-section="batch">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                        <path d="M3 9h18" />
+                        <path d="M9 21V9" />
+                    </svg>
+                    <span class="nav-text">Batch Processing</span>
+                </button>
+
+                <button class="nav-link" data-section="analytics">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3v18h18" />
+                        <path d="m19 9-5 5-4-4-3 3" />
+                    </svg>
+                    <span class="nav-text">Vision Analytics</span>
+                </button>
+
+                <button class="nav-link" data-section="history">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span class="nav-text">Detection History</span>
+                </button>
+
+                <button class="nav-link" data-section="settings">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <span class="nav-text">Settings</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-pill" style="font-size: 11px; padding: 3px 8px;">
+                    <span class="status-dot active"></span>
+                    <span class="nav-text">v1.0.0</span>
+                </span>
+                <button class="sidebar-toggle-btn" id="sidebar-toggle" title="Collapse sidebar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN VIEW WRAPPER -->
+        <div class="main-wrapper">
+            <!-- TOP HEADER -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle-btn" id="mobile-menu-btn" style="display: none;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="4" x2="20" y1="12" y2="12" />
+                            <line x1="4" x2="20" y1="6" y2="6" />
+                            <line x1="4" x2="20" y1="18" y2="18" />
+                        </svg>
+                    </button>
+                    <div class="header-title-pill" id="current-section-title">Platform Overview</div>
+                </div>
+
+                <div class="header-right">
+                    <span class="status-pill">
+                        <span class="status-dot active"></span>
+                        <span>YOLO26n Engine</span>
+                    </span>
+                    <span class="status-pill" id="db-status-badge">
+                        <span class="status-dot blue"></span>
+                        <span>DB Active</span>
+                    </span>
+                    <span class="status-pill" id="timing-pill" style="display: none;">0 ms</span>
+                    <span class="status-pill mono-font" id="realtime-clock" style="font-size: 12px; color: var(--text-secondary);">--:--:--</span>
+                </div>
+            </header>
+
+            <!-- WORKSPACE 1: OVERVIEW -->
+            <main class="workspace active" id="workspace-overview">
+                <div style="margin-bottom: 32px; max-width: 640px;">
+                    <span class="status-pill" style="margin-bottom: 12px; background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.35); color: #93C5FD;">
+                        Neural Vision Platform
+                    </span>
+                    <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 12px; line-height: 1.2;">
+                        Real-Time Computer Vision &amp; Deep Scene Intelligence
+                    </h1>
+                    <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 24px;">
+                        Detect, classify, and track multi-class objects at lightning speed with YOLO26n. Persist structured detections into MySQL, inspect granular coordinates, and generate scene intelligence with Google Gemini.
+                    </p>
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn-primary" style="width: auto; padding: 12px 24px;" onclick="AIODApp.switchSection('single')">
+                            Open Detection Workspace
+                        </button>
+                        <button class="btn-secondary" onclick="AIODApp.switchSection('batch')">
+                            Batch Processing Hub
+                        </button>
+                    </div>
+                </div>
+
+                <!-- OVERVIEW STATS GRID -->
+                <div class="grid-4col" style="margin-bottom: 28px;">
+                    <div class="glass-card">
+                        <div style="font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">Total Detections Logged</div>
+                        <div style="font-size: 32px; font-weight: 800; color: var(--accent-primary);" id="hero-stat-total-processed">0</div>
+                    </div>
+                    <div class="glass-card">
+                        <div style="font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">Total Objects Detected</div>
+                        <div style="font-size: 32px; font-weight: 800; color: var(--accent-secondary);" id="hero-stat-total-objects">0</div>
+                    </div>
+                    <div class="glass-card">
+                        <div style="font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">Recent Average Latency</div>
+                        <div style="font-size: 32px; font-weight: 800; color: var(--accent-cyan);" id="hero-stat-avg-latency">0 ms</div>
+                    </div>
+                    <div class="glass-card">
+                        <div style="font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">Neural Architecture</div>
+                        <div style="font-size: 20px; font-weight: 700; color: #10B981; margin-top: 6px;">YOLO26n (COCO)</div>
+                    </div>
+                </div>
+
+                <!-- CAPABILITIES CARDS -->
+                <div class="grid-3col">
+                    <div class="glass-card">
+                        <h3 class="card-title" style="margin-bottom: 10px;">
+                            <span style="color: var(--accent-primary);">⚡</span> Fast Shared Inference
+                        </h3>
+                        <p style="color: var(--text-secondary); font-size: 13px;">
+                            Thread-safe singleton detector keeps the neural weights hot in memory, eliminating redundant model initializations and maximizing throughput.
+                        </p>
+                    </div>
+                    <div class="glass-card">
+                        <h3 class="card-title" style="margin-bottom: 10px;">
+                            <span style="color: var(--accent-secondary);">🗄️</span> Relational Persistence
+                        </h3>
+                        <p style="color: var(--text-secondary); font-size: 13px;">
+                            Master-child database schema safely stores detection metadata and individual bounding box coordinates with atomic transaction commits.
+                        </p>
+                    </div>
+                    <div class="glass-card">
+                        <h3 class="card-title" style="margin-bottom: 10px;">
+                            <span style="color: var(--accent-cyan);">✨</span> Multimodal AI Insights
+                        </h3>
+                        <p style="color: var(--text-secondary); font-size: 13px;">
+                            Deep vision analysis powered by Google Gemini provides holistic scene descriptions, anomaly detection, and contextual understanding.
+                        </p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- WORKSPACE 2: SINGLE IMAGE DETECTION -->
+            <main class="workspace" id="workspace-single">
+                <div class="grid-2col">
+                    <!-- CONTROLS COLUMN -->
+                    <div class="glass-card">
+                        <div class="glass-card-header">
+                            <h2 class="card-title">Detection Parameters</h2>
+                            <span class="status-pill" style="font-size: 11px;">COCO 80</span>
+                        </div>
+
+                        <!-- Drop Zone -->
+                        <div class="drop-zone" id="single-drop-zone">
+                            <svg class="drop-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" x2="12" y1="3" y2="15" />
+                            </svg>
+                            <div class="drop-primary-text" id="single-drop-filename">Click or Drag Image Here</div>
+                            <div class="drop-sub-text">Supported: JPG, PNG, WEBP, BMP</div>
+                            <input type="file" id="single-file-input" accept="image/*" style="display: none;">
+                        </div>
+
+                        <!-- Confidence Slider -->
+                        <div class="form-group">
+                            <div class="form-label">
+                                <span>Confidence Threshold</span>
+                                <span class="slider-value-badge" id="conf-badge">0.25</span>
+                            </div>
+                            <div class="slider-wrapper">
+                                <input type="range" id="conf-slider" min="0.05" max="1.0" step="0.05" value="0.25">
+                            </div>
+                        </div>
+
+                        <!-- Class Filter -->
+                        <div class="form-group">
+                            <div class="form-label">
+                                <span>Filter Specific Classes (Optional)</span>
+                            </div>
+                            <input type="text" id="classes-filter" class="form-input" placeholder="e.g. person, car, dog">
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;">
+                                <button type="button" class="btn-secondary filter-chip" style="font-size: 11px; padding: 2px 8px;" data-class="person">+ person</button>
+                                <button type="button" class="btn-secondary filter-chip" style="font-size: 11px; padding: 2px 8px;" data-class="car">+ car</button>
+                                <button type="button" class="btn-secondary filter-chip" style="font-size: 11px; padding: 2px 8px;" data-class="dog">+ dog</button>
+                                <button type="button" class="btn-secondary filter-chip" style="font-size: 11px; padding: 2px 8px;" data-class="bottle">+ bottle</button>
+                            </div>
+                        </div>
+
+                        <!-- Action Button -->
+                        <button class="btn-primary" id="detect-btn" disabled>
+                            <span id="detect-btn-text">Run YOLO Detection</span>
+                        </button>
+                    </div>
+
+                    <!-- VIEWPORT COLUMN -->
+                    <div class="glass-card viewport-card">
+                        <div class="glass-card-header">
+                            <h2 class="card-title">Vision Inspection Viewport</h2>
+                            <!-- View Mode Switcher -->
+                            <div class="mode-toggle-group" id="mode-switcher-container" style="display: none;">
+                                <button class="mode-toggle-btn active" id="mode-inspector-btn">Interactive Inspector</button>
+                                <button class="mode-toggle-btn" id="mode-comparison-btn">Split Slider</button>
+                            </div>
+                        </div>
+
+                        <div class="preview-stage" id="preview-stage">
+                            <!-- Empty State Placeholder -->
+                            <div class="empty-state" id="preview-placeholder">
+                                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect width="18" height="18" x="3" y="3" rx="2" />
+                                    <circle cx="9" cy="9" r="2" />
+                                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                                </svg>
+                                <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">No image analyzed yet</div>
+                                <div style="font-size: 12px; color: var(--text-muted);">Upload an image and run YOLO detection to inspect results.</div>
+                            </div>
+
+                            <!-- Holographic Laser Scanner -->
+                            <div class="holographic-scanner" id="holographic-scanner">
+                                <div class="scanner-grid"></div>
+                                <div class="scanner-beam"></div>
+                            </div>
+
+                            <!-- Mode 1: Interactive Inspector View -->
+                            <div id="inspector-view" style="display: none; position: relative; max-width: 100%; max-height: 520px;">
+                                <img id="single-annotated-img" src="" alt="Detection Preview" style="max-width: 100%; max-height: 520px; display: block; border-radius: var(--radius-md);">
+                                <div class="bounding-box-overlay" id="bbox-overlay"></div>
+                            </div>
+
+                            <!-- Mode 2: Split Image Comparison Slider -->
+                            <div class="comparison-container" id="comparison-container">
+                                <div class="comparison-wrapper" id="comparison-wrapper">
+                                    <!-- Raw Image Underneath -->
+                                    <img id="comparison-raw-img" src="" alt="Raw Image">
+                                    
+                                    <!-- Annotated Image on Top Layer -->
+                                    <div class="comparison-top-layer" id="comparison-top-layer">
+                                        <img id="comparison-annotated-img" src="" alt="Annotated Image">
+                                    </div>
+
+                                    <!-- Draggable Center Handle -->
+                                    <div class="comparison-handle" id="comparison-handle">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <polyline points="15 18 9 12 15 6" />
+                                            <polyline points="9 18 15 12 9 6" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Statistics Row -->
+                        <div class="grid-3col" id="detection-stats-row" style="margin-top: 18px; display: none;">
+                            <div class="glass-card" style="padding: 14px;">
+                                <div style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px;">Total Objects</div>
+                                <div style="font-size: 22px; font-weight: 800; color: var(--accent-primary);" id="stat-total-objects">0</div>
+                            </div>
+                            <div class="glass-card" style="padding: 14px;">
+                                <div style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px;">Unique Classes</div>
+                                <div style="font-size: 22px; font-weight: 800; color: var(--accent-secondary);" id="stat-unique-classes">0</div>
+                            </div>
+                            <div class="glass-card" style="padding: 14px;">
+                                <div style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px;">Inference Latency</div>
+                                <div style="font-size: 22px; font-weight: 800; color: var(--accent-cyan);" id="stat-inference-time">0 ms</div>
+                            </div>
+                        </div>
+
+                        <!-- Class Pills -->
+                        <div id="detection-pills" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;"></div>
+
+                        <!-- Synchronized Bounding Boxes Table -->
+                        <div id="detection-table-container" style="display: none; margin-top: 20px;">
+                            <div class="glass-card-header" style="margin-bottom: 10px; padding-bottom: 8px;">
+                                <h3 style="font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">
+                                    Spatial Coordinate Inspector
+                                </h3>
+                            </div>
+                            <div class="table-wrapper" style="max-height: 200px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Class</th>
+                                            <th>Confidence</th>
+                                            <th>Bounding Box</th>
+                                            <th>Dimensions</th>
+                                            <th>Area</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detection-table-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Gemini Multimodal AI Drawer -->
+                        <div class="glass-card" id="gemini-card" style="display: none; margin-top: 20px; border-color: rgba(59, 130, 246, 0.25);">
+                            <div class="glass-card-header" style="margin-bottom: 12px; padding-bottom: 8px;">
+                                <h3 style="font-size: 14px; font-weight: 700; color: #93C5FD; display: flex; align-items: center; gap: 8px;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                                    Google Gemini Multimodal Scene Intelligence
+                                </h3>
+                                <button class="btn-secondary" id="gemini-btn" style="font-size: 12px; padding: 4px 12px;">
+                                    ✨ Generate Scene Analysis
+                                </button>
+                            </div>
+                            <div id="gemini-output" style="font-size: 13px; line-height: 1.6; color: var(--text-primary); white-space: pre-wrap;">
+                                Click "Generate Scene Analysis" to query Google Gemini Vision.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- WORKSPACE 3: BATCH PROCESSING -->
+            <main class="workspace" id="workspace-batch">
+                <div class="grid-2col">
+                    <div class="glass-card">
+                        <div class="glass-card-header">
+                            <h2 class="card-title">Batch Queue &amp; Ingestion</h2>
+                        </div>
+
+                        <div class="drop-zone" id="batch-drop-zone">
+                            <svg class="drop-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/>
+                            </svg>
+                            <div class="drop-primary-text" id="batch-drop-text">Select Multiple Images for Batch Queue</div>
+                            <div class="drop-sub-text">Sequential processing protects GPU memory</div>
+                            <input type="file" id="batch-files-input" multiple accept="image/*" style="display: none;">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label">
+                                <span>Confidence Threshold</span>
+                                <span class="slider-value-badge" id="batch-conf-badge">0.25</span>
+                            </div>
+                            <div class="slider-wrapper">
+                                <input type="range" id="batch-conf-slider" min="0.05" max="1.0" step="0.05" value="0.25">
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" id="batch-start-btn" disabled>
+                            <span id="batch-btn-text">Start Batch Detection</span>
+                        </button>
+
+                        <div class="indeterminate-progress-bar" id="batch-indeterminate-bar"></div>
+                        <div id="batch-status-message" style="display: none; margin-top: 10px; font-size: 12px; color: var(--accent-cyan); text-align: center;"></div>
+                    </div>
+
+                    <div>
+                        <!-- BATCH SUMMARY METRICS -->
+                        <div class="glass-card" id="batch-summary-card" style="display: none; margin-bottom: 20px;">
+                            <div class="glass-card-header">
+                                <h3 class="card-title">Verified Batch Run Summary</h3>
+                            </div>
+                            <div class="grid-4col" style="margin-bottom: 16px;">
+                                <div>
+                                    <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Processed</div>
+                                    <div style="font-size: 24px; font-weight: 800; color: var(--accent-primary);" id="batch-stat-processed">0</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Failed</div>
+                                    <div style="font-size: 24px; font-weight: 800; color: var(--accent-rose);" id="batch-stat-failed">0</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Total Objects</div>
+                                    <div style="font-size: 24px; font-weight: 800; color: var(--accent-secondary);" id="batch-stat-objects">0</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Avg Latency</div>
+                                    <div style="font-size: 24px; font-weight: 800; color: var(--accent-cyan);" id="batch-stat-avg-time">0 ms</div>
+                                </div>
+                            </div>
+                            <div id="batch-class-pills" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+                        </div>
+
+                        <!-- GALLERY GRID -->
+                        <div class="gallery-grid" id="batch-gallery"></div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- WORKSPACE 4: VISION ANALYTICS -->
+            <main class="workspace" id="workspace-analytics">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <div>
+                        <h2 style="font-size: 22px; font-weight: 800;">Vision Analytics &amp; Statistical Profiling</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">Real aggregated telemetry calculated directly from database records.</p>
+                    </div>
+                    <button class="btn-secondary" onclick="AIODApp.switchSection('analytics')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+                        Refresh Analytics
+                    </button>
+                </div>
+
+                <!-- LIFETIME AGGREGATIONS -->
+                <div class="grid-3col" style="margin-bottom: 24px;">
+                    <div class="glass-card">
+                        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px;">Lifetime Images Processed</div>
+                        <div style="font-size: 28px; font-weight: 800; color: var(--accent-primary);" id="analytics-total-images">0</div>
+                    </div>
+                    <div class="glass-card">
+                        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px;">Lifetime Objects Identified</div>
+                        <div style="font-size: 28px; font-weight: 800; color: var(--accent-secondary);" id="analytics-total-objects">0</div>
+                    </div>
+                    <div class="glass-card">
+                        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px;">Overall Mean Confidence</div>
+                        <div style="font-size: 28px; font-weight: 800; color: var(--accent-emerald);" id="analytics-avg-conf">0%</div>
+                    </div>
+                </div>
+
+                <!-- CHARTS GRID -->
+                <div class="grid-2col" style="margin-bottom: 24px;">
+                    <div class="glass-card">
+                        <div class="glass-card-header">
+                            <h3 class="card-title">Lifetime Class Distribution</h3>
+                        </div>
+                        <div style="height: 280px; position: relative;">
+                            <canvas id="chart-class-distribution"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="glass-card-header">
+                            <h3 class="card-title">Top Detected Object Classes</h3>
+                        </div>
+                        <div style="height: 280px; position: relative;">
+                            <canvas id="chart-top-classes"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT TRENDS -->
+                <div class="glass-card">
+                    <div class="glass-card-header">
+                        <h3 class="card-title">Recent Inference Latency Profile (Latest 50 Runs)</h3>
+                    </div>
+                    <div style="height: 240px; position: relative;">
+                        <canvas id="chart-recent-latencies"></canvas>
+                    </div>
+                </div>
+            </main>
+
+            <!-- WORKSPACE 5: DETECTION AUDIT HISTORY -->
+            <main class="workspace" id="workspace-history">
+                <div class="glass-card">
+                    <div class="glass-card-header">
+                        <div>
+                            <h2 class="card-title">Detection Audit History</h2>
+                            <p style="color: var(--text-secondary); font-size: 12px; margin-top: 2px;">Paginated database records with bounding-box metadata.</p>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="history-search-input" class="form-input" placeholder="Search by ID, filename, or class..." style="width: 240px; padding: 6px 12px; font-size: 12px;">
+                            <button class="btn-secondary" id="export-csv-btn" title="Export records as CSV">Export CSV</button>
+                            <button class="btn-secondary" id="export-json-btn" title="Export records as JSON">Export JSON</button>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper" style="max-height: 520px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Preview</th>
+                                    <th>Image File</th>
+                                    <th>Timestamp</th>
+                                    <th>Latency</th>
+                                    <th>Detected Classes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody">
+                                <tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">Loading database records...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+
+            <!-- WORKSPACE 6: SYSTEM SETTINGS -->
+            <main class="workspace" id="workspace-settings">
+                <div class="glass-card" style="max-width: 800px;">
+                    <div class="glass-card-header">
+                        <h2 class="card-title">System &amp; Architecture Diagnostics</h2>
+                        <span class="status-pill active"><span class="status-dot active"></span> Operational</span>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; justify-content: space-between; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-surface-elevated);">
+                            <span style="font-weight: 600; color: var(--text-secondary);">Neural Network Model</span>
+                            <span class="mono-font" style="color: var(--accent-primary);">yolo26n.pt</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-surface-elevated);">
+                            <span style="font-weight: 600; color: var(--text-secondary);">Supported Classes Count</span>
+                            <span class="mono-font" style="color: var(--accent-secondary);">80 (COCO Standard)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-surface-elevated);">
+                            <span style="font-weight: 600; color: var(--text-secondary);">Default Confidence Threshold</span>
+                            <span class="mono-font">0.25</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-surface-elevated);">
+                            <span style="font-weight: 600; color: var(--text-secondary);">Default IoU NMS Threshold</span>
+                            <span class="mono-font">0.45</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-surface-elevated);">
+                            <span style="font-weight: 600; color: var(--text-secondary);">Database Architecture</span>
+                            <span class="mono-font" style="color: var(--accent-emerald);">MySQL Connector + SQLite Fallback</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-surface-elevated);">
+                            <span style="font-weight: 600; color: var(--text-secondary);">Multimodal Scene Intelligence</span>
+                            <span class="mono-font" style="color: var(--accent-cyan);">Google Gemini 1.5 Flash</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="{{ url_for('static', filename='js/three-scene.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app-ui.js') }}"></script>
+</body>
+
+</html>

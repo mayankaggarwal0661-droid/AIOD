@@ -1,0 +1,19 @@
+# Core Computer Vision & Deep Learning
+ultralytics>=8.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# Database Integration
+mysql-connector-python>=8.0.0
+
+# Web Application & REST API
+flask>=3.0.0
+werkzeug>=3.0.0
+
+# HTTP Requests & Multimodal AI
+requests>=2.30.0
+
+# Automated Testing
+pytest>=8.0.0
